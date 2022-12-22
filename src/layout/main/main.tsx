@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { Preloader } from '../../components/preloader/preloader';
+import ProductList from '../../components/products-list/products-list';
 import { API_KEY, API_URL } from '../../config';
 
 export function Main(): JSX.Element {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  // TODO типизировать заголовок
   useEffect(() => {
     fetch(API_URL, {
       headers: {
@@ -24,8 +27,8 @@ export function Main(): JSX.Element {
   return (
     <main className="container main">
       {isLoading
-        ? <p>Loading</p>
-        : <p>{products.length}</p>}
+        ? <Preloader />
+        : <ProductList />}
     </main>
   );
 }
