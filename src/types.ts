@@ -2,14 +2,9 @@ export interface IBackProduct {
     mainId: string;
     displayName: string;
     displayDescription: string;
-    displayAssets: [
-        {
-            background: string;
-        },
-        {
-            background: string;
-        }
-    ];
+    displayAssets: {
+        background: string;
+    }[];
     price: {
         finalPrice: number;
     };
