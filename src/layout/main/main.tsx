@@ -1,38 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Preloader } from '../../components/preloader/preloader';
 import ProductList from '../../components/products-list/products-list';
-import { API_KEY, API_URL } from '../../config';
-import { transformProduct } from './helpers';
+import { useFetchProducts } from './useFetchProducts';
 
 export function Main(): JSX.Element {
-  const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    fetch(API_URL, {
-      headers: {
-        Authorization: API_KEY,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.featured) {
-          setProducts(data.featured.map(transformProduct));
-        }
-      })
-      .catch((error) => {
-        throw (error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
+  const {
+    isError, isLoading, products, refetchProducts,
+  } = useFetchProducts();
 
   return (
     <main className="container main">
-      {isLoading
-        ? <Preloader />
-        : <ProductList products={products} />}
+      {isLoading && <Preloader />}
+      {isError && (
+        <div>
+          <p>Ошибка запроса</p>
+          <button type="button" onClick={refetchProducts}>перезагрузить</button>
+        </div>
+      )}
+      {!!products.length && <ProductList products={products} />}
     </main>
   );
 }

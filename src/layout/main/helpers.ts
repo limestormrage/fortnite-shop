@@ -1,13 +1,13 @@
 import { IBackProduct, IProduct } from '../../types';
 
 export const transformProduct = ({
-  price, icon, description, id, name,
+  mainId, displayName, displayDescription, displayAssets, price,
 }: IBackProduct): IProduct => (
   {
-    price,
-    image: icon,
-    description,
-    id,
-    name,
+    price: price.finalPrice,
+    image: displayAssets[0].background,
+    description: displayDescription,
+    id: mainId,
+    name: displayName,
   }
 );
