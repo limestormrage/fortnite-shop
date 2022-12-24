@@ -16,8 +16,8 @@ export function Main(): JSX.Element {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.featured) {
-          setProducts(data.featured.map(transformProduct));
+        if (data.shop) {
+          setProducts(data.shop.map(transformProduct));
         }
       })
       .catch((error) => {
