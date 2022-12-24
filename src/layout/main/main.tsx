@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Preloader } from '../../components/preloader/preloader';
 import ProductList from '../../components/products-list/products-list';
 import { API_KEY, API_URL } from '../../config';
-import { IBackProduct } from '../../types';
 import { transformProduct } from './helpers';
 
 export function Main(): JSX.Element {
@@ -33,7 +32,7 @@ export function Main(): JSX.Element {
     <main className="container main">
       {isLoading
         ? <Preloader />
-        : <ProductList />}
+        : <ProductList products={products} />}
     </main>
   );
 }
