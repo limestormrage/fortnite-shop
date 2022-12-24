@@ -1,14 +1,19 @@
 import React from 'react';
+import { IProductProps } from './product.props';
 
-export default function Product(): JSX.Element {
+export default function Product({ product }: IProductProps): JSX.Element {
+  const {
+    name, description, image, price,
+  } = product;
+
   return (
     <div className="card">
       <div className="card-image">
-        <img src="https://mskkontrol.ru/assets/img/works/office.jpg" alt="офис" />
+        <img src={image} alt={name} />
       </div>
       <div className="card-content">
-        <span className="card-title">Имя товара</span>
-        <p>Описание</p>
+        <span className="card-title">{name}</span>
+        <p>{description}</p>
       </div>
       <div className="card-action">
         <button
@@ -18,7 +23,7 @@ export default function Product(): JSX.Element {
           Купить
         </button>
         <span className="right" style={{ fontSize: '1.8rem' }}>
-          цена
+          {price}
           {' '}
           руб.
         </span>

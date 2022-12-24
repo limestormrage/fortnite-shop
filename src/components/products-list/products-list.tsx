@@ -1,15 +1,20 @@
 import React from 'react';
 import Product from '../product/product';
 import styles from './product-list.module.scss';
+import { IProductListProps } from './product-list.props';
 
-export default function ProductList(): JSX.Element {
+export default function ProductList({ products }: IProductListProps): JSX.Element {
+  if (!products.length) {
+    return (
+      <h3>Товары отсутствуют</h3>
+    );
+  }
+
   return (
     <div className={styles.products}>
-      <Product />
-      <Product />
-      <Product />
-      <Product />
-      <Product />
+      {products.map((product) => (
+        <Product key={product.id} product={product} />
+      ))}
     </div>
   );
 }
