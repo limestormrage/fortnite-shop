@@ -14,6 +14,9 @@ export const useFetchProducts = (): IUseFetchProducts => {
   }, []);
 
   useEffect(() => {
+    setIsLoading(true);
+    setIsError(false);
+
     fetch(API_URL, {
       headers: {
         Authorization: API_KEY,
@@ -21,8 +24,6 @@ export const useFetchProducts = (): IUseFetchProducts => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setIsError(false);
-
         if (data.shop) {
           setProducts(data.shop.map(transformProduct));
         }
