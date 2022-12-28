@@ -1,3 +1,5 @@
+@use 'src/styles/mixins.scss';
+
 .cart {
   position: fixed;
   top: 93px;
@@ -6,4 +8,10 @@
 
   cursor: pointer;
   z-index: 5;
+
+  @include mixins.vp-1023 {
+    right: 15px;
+    bottom: 50px;
+    top: unset;
+  }
 }
