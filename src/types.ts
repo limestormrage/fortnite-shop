@@ -11,9 +11,16 @@ export interface IBackProduct {
 }
 
 export interface IProduct {
-  id: string,
-  name: string,
-  description: string,
-  price: number,
-  image: string,
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+}
+
+export interface ICartProduct {
+    id: string;
+    name: string;
+    price: number;
+    quantity: number;
 }

@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './product.module.scss';
 import { IProductProps } from './product.props';
 
-export default function Product({ product }: IProductProps): JSX.Element {
+export default function Product({ product, addToCart }: IProductProps): JSX.Element {
   const {
     name, description, image, price,
   } = product;
@@ -21,6 +21,7 @@ export default function Product({ product }: IProductProps): JSX.Element {
         <button
           type="button"
           className="btn"
+          onClick={() => addToCart(product)}
         >
           Купить
         </button>
