@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import Cart from '../../components/card/card';
+import CartList from '../../components/cart-list/cart-list';
+import Cart from '../../components/card/cart';
 import { Preloader } from '../../components/preloader/preloader';
 import ProductList from '../../components/products-list/products-list';
 import { ICartProduct, IProduct } from '../../types';
@@ -52,6 +53,7 @@ export function Main(): JSX.Element {
         </div>
       )}
       {!!products.length && <ProductList products={products} addToCart={addToCart} />}
+      <CartList cartItems={currentProduct} />
     </main>
   );
 }

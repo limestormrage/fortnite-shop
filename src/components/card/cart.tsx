@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
-import styles from './card.module.scss';
+import styles from './cart.module.scss';
 
 export default function Cart(): JSX.Element {
   return (
