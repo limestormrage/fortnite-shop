@@ -53,7 +53,6 @@ export function Main(): JSX.Element {
         </div>
       )}
       {!!products.length && <ProductList products={products} addToCart={addToCart} />}
-      <CartList cartItems={currentProduct} />
     </main>
   );
 }
