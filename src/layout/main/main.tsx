@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import CartList from '../../components/cart-list/cart-list';
 import Cart from '../../components/card/cart';
 import { Preloader } from '../../components/preloader/preloader';
 import ProductList from '../../components/products-list/products-list';
@@ -44,7 +43,7 @@ export function Main(): JSX.Element {
 
   return (
     <main className="container main">
-      <Cart />
+      <Cart currentProduct={currentProduct} />
       {isLoading && <Preloader />}
       {isError && (
         <div>
