@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Cart from '../../components/card/cart';
+import Cart from '../../components/cart/cart';
 import { Preloader } from '../../components/preloader/preloader';
 import ProductList from '../../components/products-list/products-list';
 import { ICartProduct, IProduct } from '../../types';
