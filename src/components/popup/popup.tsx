@@ -12,7 +12,9 @@ export default function Popup({ children, isOpened }: PopupProps): JSX.Element |
     <Portal>
       <div className={styles.popup} role="dialog">
         <div className={styles.overlay}>overlay</div>
-        <div>{children}</div>
+        <div className={styles.content}>
+          {children}
+        </div>
       </div>
     </Portal>
   );

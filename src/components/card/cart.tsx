@@ -10,6 +10,7 @@ export default function Cart({ currentProduct }: ICartProps): JSX.Element {
 
   return (
     <>
+      {!isOpenCart && (
       <button
         type="button"
         className={cn(styles.cart, 'deep-purple darken-4 white-text')}
@@ -18,6 +19,7 @@ export default function Cart({ currentProduct }: ICartProps): JSX.Element {
         <i className="material-icons">shopping_cart</i>
         <span>0</span>
       </button>
+      )}
       <Popup isOpened={isOpenCart}>
         <CartList cartItems={currentProduct} />
       </Popup>
