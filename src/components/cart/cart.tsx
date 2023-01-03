@@ -8,6 +8,10 @@ import { ICartProps } from './cart.props';
 export default function Cart({ currentProduct }: ICartProps): JSX.Element {
   const [isOpenCart, setIsOpenCart] = useState(false);
 
+  const handleCloseCart = (): void => {
+    setIsOpenCart(false);
+  };
+
   return (
     <>
       {!isOpenCart && (
@@ -20,8 +24,8 @@ export default function Cart({ currentProduct }: ICartProps): JSX.Element {
         <span>0</span>
       </button>
       )}
-      <Popup isOpened={isOpenCart}>
-        <CartList cartItems={currentProduct} />
+      <Popup isOpened={isOpenCart} onClose={handleCloseCart}>
+        <CartList cartItems={currentProduct} onClose={handleCloseCart} />
       </Popup>
     </>
   );

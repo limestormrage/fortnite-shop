@@ -4,7 +4,7 @@ import CardItem from '../cart-item/cart-item';
 import { ICartListProps } from './cart-list.props';
 import styles from './cart-list.module.scss';
 
-export default function CartList({ cartItems }: ICartListProps): JSX.Element {
+export default function CartList({ cartItems, onClose }: ICartListProps): JSX.Element {
   const totalPrice = cartItems.reduce((sum, product) => sum + product.price * product.quantity, 0);
   return (
     <ul className={cn(styles.cartList, 'collection')}>
@@ -14,6 +14,7 @@ export default function CartList({ cartItems }: ICartListProps): JSX.Element {
         <button
           type="button"
           className={cn(styles.buttonClose, 'secondary-content')}
+          onClick={onClose}
         >
           <i className="material-icons">clear</i>
         </button>
