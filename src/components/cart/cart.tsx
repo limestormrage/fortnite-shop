@@ -5,7 +5,7 @@ import Popup from '../popup/popup';
 import CartList from '../cart-list/cart-list';
 import { ICartProps } from './cart.props';
 
-export default function Cart({ currentProduct }: ICartProps): JSX.Element {
+export default function Cart({ currentProduct, deleteToCart }: ICartProps): JSX.Element {
   const [isOpenCart, setIsOpenCart] = useState(false);
 
   const handleCloseCart = (): void => {
@@ -24,9 +24,15 @@ export default function Cart({ currentProduct }: ICartProps): JSX.Element {
         <span>0</span>
       </button>
       )}
-      <Popup isOpened={isOpenCart} onClose={handleCloseCart}>
-        <CartList cartItems={currentProduct} onClose={handleCloseCart} />
+      { isOpenCart && (
+      <Popup onClose={handleCloseCart}>
+        <CartList
+          cartItems={currentProduct}
+          onClose={handleCloseCart}
+          deleteToCart={deleteToCart}
+        />
       </Popup>
+      )}
     </>
   );
 }

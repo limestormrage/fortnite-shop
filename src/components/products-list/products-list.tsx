@@ -13,7 +13,11 @@ export default function ProductList({ products, addToCart }: IProductListProps):
   return (
     <div className={styles.products}>
       {products.map((product) => (
-        <Product key={product.id} product={product} addToCart={addToCart} />
+        <Product
+          key={product.id}
+          product={product}
+          addToCart={addToCart}
+        />
       ))}
     </div>
   );
