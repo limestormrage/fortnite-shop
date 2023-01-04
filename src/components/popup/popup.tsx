@@ -5,21 +5,21 @@ import Portal from '../portal/portal';
 import styles from './popup.module.scss';
 import { PopupProps } from './popup.props';
 
-export default function Popup({ children, isOpened, onClose }: PopupProps): JSX.Element | null {
+export default function Popup({ children, onClose }: PopupProps): JSX.Element | null {
   // Закрывает модальное окно при нажатии на Esc
   useEffect(() => {
-    const handleKyeDows = (evt: KeyboardEvent): void => {
+    const handleKyeDown = (evt: KeyboardEvent): void => {
       if (evt.code === 'Escape') {
         onClose();
       }
     };
 
-    document.addEventListener('keydown', handleKyeDows);
-  }, [onClose]);
+    document.addEventListener('keydown', handleKyeDown);
 
-  if (!isOpened) {
-    return null;
-  }
+    return () => {
+      document.removeEventListener('keydown', handleKyeDown);
+    };
+  }, [onClose]);
 
   return (
     <Portal>

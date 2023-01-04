@@ -24,9 +24,11 @@ export default function Cart({ currentProduct }: ICartProps): JSX.Element {
         <span>0</span>
       </button>
       )}
-      <Popup isOpened={isOpenCart} onClose={handleCloseCart}>
+      { isOpenCart && (
+      <Popup onClose={handleCloseCart}>
         <CartList cartItems={currentProduct} onClose={handleCloseCart} />
       </Popup>
+      )}
     </>
   );
 }
