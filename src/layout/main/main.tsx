@@ -41,9 +41,18 @@ export function Main(): JSX.Element {
     setCurrentProduct(newOrder);
   };
 
+  const deleteToCart = (id: string): void => {
+    const newOrder = currentProduct.filter((product) => product.id !== id);
+
+    setCurrentProduct(newOrder);
+  };
+
   return (
     <main className="container main">
-      <Cart currentProduct={currentProduct} />
+      <Cart
+        currentProduct={currentProduct}
+        deleteToCart={deleteToCart}
+      />
       {isLoading && <Preloader />}
       {isError && (
         <div>
@@ -51,7 +60,12 @@ export function Main(): JSX.Element {
           <button type="button" onClick={refetchProducts}>перезагрузить</button>
         </div>
       )}
-      {!!products.length && <ProductList products={products} addToCart={addToCart} />}
+      {!!products.length && (
+      <ProductList
+        products={products}
+        addToCart={addToCart}
+      />
+      )}
     </main>
   );
 }

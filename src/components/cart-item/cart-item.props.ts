@@ -1,5 +1,6 @@
 import { ICartProduct } from '../../types';
 
 export interface ICartItemProps {
-  product: ICartProduct
+  product: ICartProduct;
+  deleteToCart: (id: string) => void;
 }
