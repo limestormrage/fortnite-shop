@@ -19,28 +19,27 @@ export default function Cart(
   const totalCountProducts = currentProduct.reduce((sum, product) => sum + product.quantity, 0);
 
   return (
-    <>
-      {!isOpenCart && (
-      <button
-        type="button"
-        className={cn(styles.cart, 'deep-purple darken-4 white-text')}
-        onClick={() => setIsOpenCart(true)}
-      >
-        <i className="material-icons">shopping_cart</i>
-        <span>{totalCountProducts}</span>
-      </button>
-      )}
-      { isOpenCart && (
-      <Popup onClose={handleCloseCart}>
-        <CartList
-          cartItems={currentProduct}
-          onClose={handleCloseCart}
-          deleteFromCart={deleteFromCart}
-          incQuantity={incQuantity}
-          decQuantity={decQuantity}
-        />
-      </Popup>
-      )}
-    </>
+    isOpenCart
+      ? (
+        <Popup onClose={handleCloseCart}>
+          <CartList
+            cartItems={currentProduct}
+            onClose={handleCloseCart}
+            deleteFromCart={deleteFromCart}
+            incQuantity={incQuantity}
+            decQuantity={decQuantity}
+          />
+        </Popup>
+      )
+      : (
+        <button
+          type="button"
+          className={cn(styles.cart, 'deep-purple darken-4 white-text')}
+          onClick={() => setIsOpenCart(true)}
+        >
+          <i className="material-icons">shopping_cart</i>
+          <span>{totalCountProducts}</span>
+        </button>
+      )
   );
 }
