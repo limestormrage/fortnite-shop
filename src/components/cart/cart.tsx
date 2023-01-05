@@ -16,6 +16,8 @@ export default function Cart(
     setIsOpenCart(false);
   };
 
+  const totalCountProducts = currentProduct.reduce((sum, product) => sum + product.quantity, 0);
+
   return (
     <>
       {!isOpenCart && (
@@ -25,7 +27,7 @@ export default function Cart(
         onClick={() => setIsOpenCart(true)}
       >
         <i className="material-icons">shopping_cart</i>
-        <span>0</span>
+        <span>{totalCountProducts}</span>
       </button>
       )}
       { isOpenCart && (
