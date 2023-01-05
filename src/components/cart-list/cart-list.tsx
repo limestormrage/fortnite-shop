@@ -5,7 +5,9 @@ import { ICartListProps } from './cart-list.props';
 import styles from './cart-list.module.scss';
 
 export default function CartList(
-  { cartItems, onClose, deleteToCart }: ICartListProps,
+  {
+    cartItems, onClose, deleteFromCart, incQuantity, decQuantity,
+  }: ICartListProps,
 ): JSX.Element {
   const totalPrice = cartItems.reduce((sum, product) => sum + product.price * product.quantity, 0);
   return (
@@ -26,7 +28,9 @@ export default function CartList(
           <CardItem
             product={product}
             key={product.id}
-            deleteToCart={deleteToCart}
+            deleteFromCart={deleteFromCart}
+            incQuantity={incQuantity}
+            decQuantity={decQuantity}
           />
         ))
         : <li className="collection-item">Корзина пуста, добавьте товары</li> }

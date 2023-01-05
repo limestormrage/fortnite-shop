@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import Cart from '../../components/cart/cart';
 import { Preloader } from '../../components/preloader/preloader';
 import ProductList from '../../components/products-list/products-list';
@@ -14,6 +15,7 @@ export function Main(): JSX.Element {
 
   const addToCart = (product: IProduct): void => {
     const itemIndex = currentProduct.findIndex((item) => item.id === product.id);
+    const toastContent = `${product.name} добавлен в корзину`;
 
     const cartProduct = {
       name: product.name,
@@ -24,25 +26,56 @@ export function Main(): JSX.Element {
 
     if (itemIndex < 0) {
       setCurrentProduct([...currentProduct, cartProduct]);
-      return;
-    }
+    } else {
+      const newOrder = currentProduct.map((item, index) => {
+        if (index === itemIndex) {
+          return ({
+            ...cartProduct,
+            quantity: item.quantity + 1,
+          });
+        }
 
-    const newOrder = currentProduct.map((item, index) => {
-      if (index === itemIndex) {
+        return item;
+      });
+
+      setCurrentProduct(newOrder);
+    }
+    toast.success(toastContent, { autoClose: 2000, theme: 'colored' });
+  };
+
+  const deleteFromCart = (id: string): void => {
+    const newOrder = currentProduct.filter((product) => product.id !== id);
+
+    setCurrentProduct(newOrder);
+  };
+
+  const incQuantity = (productId: string): void => {
+    const newOrder = currentProduct.map((product) => {
+      if (product.id === productId) {
         return ({
-          ...cartProduct,
-          quantity: item.quantity + 1,
+          ...product,
+          quantity: product.quantity + 1,
         });
       }
-
-      return item;
+      return product;
     });
 
     setCurrentProduct(newOrder);
   };
 
-  const deleteToCart = (id: string): void => {
-    const newOrder = currentProduct.filter((product) => product.id !== id);
+  const decQuantity = (productId: string): void => {
+    const newOrder = currentProduct.map((product) => {
+      if (product.id === productId) {
+        const newQuantity = product.quantity - 1;
+
+        return ({
+          ...product,
+          quantity: newQuantity > 1 ? newQuantity : 1,
+        });
+      }
+
+      return product;
+    });
 
     setCurrentProduct(newOrder);
   };
@@ -51,7 +84,9 @@ export function Main(): JSX.Element {
     <main className="container main">
       <Cart
         currentProduct={currentProduct}
-        deleteToCart={deleteToCart}
+        deleteFromCart={deleteFromCart}
+        incQuantity={incQuantity}
+        decQuantity={decQuantity}
       />
       {isLoading && <Preloader />}
       {isError && (
