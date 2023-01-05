@@ -64,12 +64,11 @@ export function Main(): JSX.Element {
   const decQuantity = (productId: string): void => {
     const newOrder = currentProduct.map((product) => {
       if (product.id === productId) {
-        if (product.quantity <= 1) {
-          return product;
-        }
+        const newQuantity = product.quantity - 1;
+
         return ({
           ...product,
-          quantity: product.quantity - 1,
+          quantity: newQuantity > 1 ? newQuantity : 1,
         });
       }
 
