@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import Cart from '../../components/cart/cart';
 import { Preloader } from '../../components/preloader/preloader';
 import ProductList from '../../components/products-list/products-list';
@@ -14,6 +15,7 @@ export function Main(): JSX.Element {
 
   const addToCart = (product: IProduct): void => {
     const itemIndex = currentProduct.findIndex((item) => item.id === product.id);
+    const toastContent = `${product.name} добавлен в корзину`;
 
     const cartProduct = {
       name: product.name,
@@ -24,21 +26,21 @@ export function Main(): JSX.Element {
 
     if (itemIndex < 0) {
       setCurrentProduct([...currentProduct, cartProduct]);
-      return;
+    } else {
+      const newOrder = currentProduct.map((item, index) => {
+        if (index === itemIndex) {
+          return ({
+            ...cartProduct,
+            quantity: item.quantity + 1,
+          });
+        }
+
+        return item;
+      });
+
+      setCurrentProduct(newOrder);
     }
-
-    const newOrder = currentProduct.map((item, index) => {
-      if (index === itemIndex) {
-        return ({
-          ...cartProduct,
-          quantity: item.quantity + 1,
-        });
-      }
-
-      return item;
-    });
-
-    setCurrentProduct(newOrder);
+    toast.success(toastContent, { autoClose: 2000, theme: 'colored' });
   };
 
   const deleteFromCart = (id: string): void => {
