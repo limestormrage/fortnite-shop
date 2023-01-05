@@ -41,8 +41,40 @@ export function Main(): JSX.Element {
     setCurrentProduct(newOrder);
   };
 
-  const deleteToCart = (id: string): void => {
+  const deleteFromCart = (id: string): void => {
     const newOrder = currentProduct.filter((product) => product.id !== id);
+
+    setCurrentProduct(newOrder);
+  };
+
+  const incQuantity = (productId: string): void => {
+    const newOrder = currentProduct.map((product) => {
+      if (product.id === productId) {
+        return ({
+          ...product,
+          quantity: product.quantity + 1,
+        });
+      }
+      return product;
+    });
+
+    setCurrentProduct(newOrder);
+  };
+
+  const decQuantity = (productId: string): void => {
+    const newOrder = currentProduct.map((product) => {
+      if (product.id === productId) {
+        if (product.quantity <= 1) {
+          return product;
+        }
+        return ({
+          ...product,
+          quantity: product.quantity - 1,
+        });
+      }
+
+      return product;
+    });
 
     setCurrentProduct(newOrder);
   };
@@ -51,7 +83,9 @@ export function Main(): JSX.Element {
     <main className="container main">
       <Cart
         currentProduct={currentProduct}
-        deleteToCart={deleteToCart}
+        deleteFromCart={deleteFromCart}
+        incQuantity={incQuantity}
+        decQuantity={decQuantity}
       />
       {isLoading && <Preloader />}
       {isError && (
