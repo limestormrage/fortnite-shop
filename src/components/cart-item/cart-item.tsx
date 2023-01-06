@@ -16,43 +16,45 @@ export default function CartItem(
   const disabledDecButton = quantity <= 1;
 
   return (
-    <li className="collection-item">
-      {name}
-      {' '}
-      <button
-        className={styles.button}
-        type="button"
-        onClick={() => decQuantity(id)}
-        disabled={disabledDecButton}
-      >
-        <i
-          className="material-icons basket-quantity"
+    <li className={cn(styles.item, 'collection-item')}>
+      <p className={styles.title}>{name}</p>
+      <div className={styles.switcher}>
+        <button
+          className={styles.button}
+          type="button"
+          onClick={() => decQuantity(id)}
+          disabled={disabledDecButton}
         >
-          remove
-        </i>
-      </button>
-      {' '}
-      x
-      {quantity}
-      {' '}
-      <button
-        className={styles.button}
-        type="button"
-        onClick={() => incQuantity(id)}
-      >
-        <i
-          className="material-icons basket-quantity"
+          <i
+            className="material-icons basket-quantity"
+          >
+            remove
+          </i>
+        </button>
+        {' '}
+        x
+        {quantity}
+        {' '}
+        <button
+          className={styles.button}
+          type="button"
+          onClick={() => incQuantity(id)}
         >
-          add
-        </i>
-      </button>
-      {' '}
-      =
-      {' '}
-      {totalPriceProduct}
+          <i
+            className="material-icons basket-quantity"
+          >
+            add
+          </i>
+        </button>
+      </div>
+      <p className={styles.price}>
+        {totalPriceProduct}
+        {' '}
+        руб.
+      </p>
       <button
         type="button"
-        className={cn(styles.button, 'secondary-content')}
+        className={cn(styles.button, styles.closeButton, 'secondary-content')}
         onClick={() => deleteFromCart(id)}
       >
         <i className="material-icons">clear</i>
