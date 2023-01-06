@@ -1,3 +1,28 @@
+.item {
+  display: grid;
+  grid-template-areas: "title switcher price action";
+  grid-template-columns: 1fr max-content max-content min-content;
+  align-items: center;
+}
+
+.title {
+  grid-area: title;
+  margin: 0;
+}
+
+.switcher {
+  grid-area: switcher;
+}
+
+.price {
+  grid-area: price;
+  margin: 0;
+}
+
+.closeButton {
+  grid-area: action;
+}
+
 .button {
   border: none;
   background: none;
